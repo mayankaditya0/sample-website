@@ -6,7 +6,7 @@ const Cart = (props) => {
  
   const placeOrder = () => {
     // Format the props.cart items
-const cartItems = props.cart.map((item) => ({
+const cartItems = props?.cart?.map((item) => ({
       title: item.productName,
       price: item.productPrice,
     }));
@@ -23,19 +23,19 @@ axios.post('/api/notify-admin', { cartItems })
     return <h2>Order placed successfully!</h2>;
   }
 
-  console.log('^^^^^^^^',props);
+
  
   return (
-    <div className="props.cart">
+    <div style={{width:"100%", color:'white', height: "100vh"}}>
       <h1>Your Cart</h1>
       <ul>
-{props.cart.map((product, index) => (
+      {props?.cart?.map((product, index) => (
           <li key={index}>
             {product.productName} - ${product.productPrice}
           </li>
         ))}
       </ul>
-      <button onClick={placeOrder}>Place Order</button>
+      <button style={{backgroundColor:'#61dafb', color:'white', height:'30px', width:'100px', marginLeft:'8px', borderRadius:'8px'}}onClick={placeOrder}>Place Order</button>
     </div>
   );
 };
