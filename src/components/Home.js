@@ -22,9 +22,9 @@ const Home = ({ addToCart }) => {
 return (
   <>
   <div>
-    <div className="markque"><marquee>
+    <div className="markque"><p>
     <span><b>Today Only:  </b>50% off on every product. <b onClick={() => window.location.href = "/"}>SHOP NOW ▸</b></span>
-      </marquee>
+      </p>
     </div>
   <header className="header">
         <div className="logo">
