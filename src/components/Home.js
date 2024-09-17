@@ -23,7 +23,7 @@ return (
   <>
   <div>
     <div className="markque"><marquee>
-    <span><b>Today Only: </b>50% off on every product. <b onClick={() => window.location.href = "/"}>SHOP NOW ▸</b></span>
+    <span><b>Today Only:  </b>50% off on every product. <b onClick={() => window.location.href = "/"}>SHOP NOW ▸</b></span>
       </marquee>
     </div>
   <header className="header">
