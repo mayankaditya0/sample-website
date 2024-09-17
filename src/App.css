@@ -11,7 +11,26 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.header{
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+.nav-buttons{
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+.nav-buttons button{
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  color: white;
+  background-color: #a39ee0;
+}
+.logo{
+  height: 70px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -20,6 +39,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  color: white;
+}
+.markque{
+  width: 100%;
+  background: #61dafb;
   color: white;
 }
 

@@ -4,7 +4,7 @@ import '../App.css';
 const envId = 'dev';
 const client = createClient({
   space: 'x6qez2w7sold',
-  accessToken: 'jcsahKPPsOK7-r3yGVZ6YqBC5IGl33JfvjMnEA0yDQo',
+  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
   environment: envId
 });
  
@@ -22,9 +22,13 @@ const Home = ({ addToCart }) => {
 return (
   <>
   <div>
+    <div className="markque"><marquee>
+    <span><b>Today Only: </b>50% off on every product. <b onClick={() => window.location.href = "/"}>SHOP NOW ▸</b></span>
+      </marquee>
+    </div>
   <header className="header">
         <div className="logo">
-          <img src="https://via.placeholder.com/120x40.png?text=Company+Logo" alt="Company Logo" />
+          <img className="logo" src="logo192.png" alt="Company Logo" />
         </div>
         <nav className="nav-buttons">
           <button onClick={() => window.location.href = "/"}>Home</button>
@@ -40,7 +44,7 @@ return (
          <img style={{height:'100%', width:'100%'}}src={product.fields.productImage.fields.file.url} alt={product.fields.title} />
          <h2>{product.fields.productName}</h2>
          <h3>{product.fields.productDescription}</h3>
-         <p>${product.fields.productPrice}</p>
+         <p>RS {product.fields.productPrice}</p>
          <button onClick={() => addToCart(product.fields)}>Add to Cart</button>
     </div>
      ))}
