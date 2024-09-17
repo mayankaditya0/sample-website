@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { createClient } from 'contentful';
-import { useNavigate } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import { useSnackbar } from 'notistack';
 
@@ -14,7 +13,6 @@ const client = createClient({
  
 const Home = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
  
   useEffect(() => {
     client.getEntries({ content_type: 'product' })
