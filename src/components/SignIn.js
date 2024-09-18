@@ -5,8 +5,8 @@ import '../App.css';
 const SignIn = () => {
     const [phone, setPhone] = useState('');
     const [otp, setOtp] = useState('');
-    // const [confirmationResult, setConfirmationResult] = useState(null);
-    // const [loading, setLoading] = useState(false);
+    const confirmationResult = null;
+    const loading = false;
 
     const handleSendOtp = async () => {
         // setLoading(true);

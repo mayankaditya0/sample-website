@@ -14,7 +14,6 @@ const client = createClient({
 const CaruselDisplay = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
   const [comminggSoon, setComingSoon] = useState([]);
-  const carouselInnerRef = useRef(null);
 
   useEffect(() => {
     client.getEntries({ content_type: 'product' })
