@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createClient } from 'contentful';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import Carusel from './Carusel'; // Ensure the path is correct
