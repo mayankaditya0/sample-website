@@ -1,0 +1,12 @@
+.carousel {
+    overflow: hidden; /* Hide overflowing items */
+    position: relative; /* Position relative for absolute children */
+    width: 100%; /* Full width */
+}
+
+.carousel-inner {
+    display: flex; /* Use flexbox to align items in a row */
+    transition: transform 0.5s ease; /* Smooth transition */
+    width: 300px; /* Full width */
+}
+

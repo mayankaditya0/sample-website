@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { createClient } from 'contentful';
-import { SnackbarProvider } from 'notistack';
-import { useSnackbar } from 'notistack';
+import { SnackbarProvider, useSnackbar } from 'notistack';
+import Carusel from './Carusel'; // Ensure the path is correct
 import '../App.css'; 
 
 const envId = 'dev';
@@ -11,7 +11,7 @@ const client = createClient({
   environment: envId
 });
 
-const Home = ({ addToCart }) => {
+const CaruselDisplay = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
   const [comminggSoon, setComingSoon] = useState([]);
   const carouselInnerRef = useRef(null);
@@ -23,7 +23,7 @@ const Home = ({ addToCart }) => {
         setProducts(response.items);
       }).catch(console.error);
 
-      client.getEntries({ content_type: 'comingSoonProduct' })
+    client.getEntries({ content_type: 'comingSoonProduct' })
       .then((response) => {
         console.log('res', response.items);
         setComingSoon(response.items);
@@ -36,70 +36,37 @@ const Home = ({ addToCart }) => {
     enqueueSnackbar(`${product.productName} added to cart!`, { variant: 'success' });
   };
 
-  useEffect(() => {
-    const carouselInner = carouselInnerRef.current;
-
-    if (!carouselInner) return; // Ensure ref is set
-
-    const cards = carouselInner.querySelectorAll('.card');
-    if (cards.length === 0) return; // Avoid error if there are no cards
-
-    let currentIndex = 0;
-
-    const moveCarousel = () => {
-      if (cards.length === 0) return; // Avoid error if there are no cards
-      currentIndex++;
-      if (currentIndex >= cards.length) {
-        currentIndex = 0; // Loop back to the start
-      }
-      const offset = -currentIndex * (cards[0].offsetWidth + 20); // Adjust for margin
-      carouselInner.style.transform = `translateX(${offset}px)`;
-    };
-
-    const intervalId = setInterval(moveCarousel, 3000);
-
-    // Clean up the interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [products]); // Depend on products to ensure it runs after data fetch
-
   return (
-    <>
-      <SnackbarProvider maxSnack={3}>
-        <div>
-        <div className="carousel">
-            <div className="carousel-inner" ref={carouselInnerRef}>
-              {comminggSoon.map((product, index) => (
-                <div className="card" key={index}>
-                  <img src={product.fields.productImage.fields.file.url} alt={product.fields.productName} />
-                  <div className="card-details">
-                    {product.fields.productName !=='Coming Soon' &&
-                    <>
-                    <h2>{product.fields.productName}</h2>
-                    <p>RS {product.fields.productPrice}</p>
-                    <p>{product.fields.productDescription}</p>
-                    </>
-                    }
-                  </div>
-                </div>
-              ))}
-            </div>
+    <div>
+      <Carusel comminggSoon={comminggSoon} />
+      <div className="product-list">
+        {products.map((product) => (
+          <div className="product-tile" key={product.sys.id}>
+            <img style={{ height: '280px', width: '100%', objectFit: 'cover' }} src={product.fields.productImage.fields.file.url} alt={product.fields.title} />
+            <h2>{product.fields.productName}</h2>
+            <h3>{product.fields.productDescription}</h3>
+            <p>RS {product.fields.productPrice}</p>
+            <button 
+              onClick={(e) => {
+                addToCartSnack(product.fields);  
+                addToCart(product.fields);
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
-          <div className="product-list">
-            {products.map((product) => (
-              <div className="product-tile" key={product.sys.id}>
-                <img style={{ height: '280px', width: '100%', objectFit: 'cover' }} src={product.fields.productImage.fields.file.url} alt={product.fields.title} />
-                <h2>{product.fields.productName}</h2>
-                <h3>{product.fields.productDescription}</h3>
-                <p>RS {product.fields.productPrice}</p>
-                <button onClick={() => { addToCart(product.fields); addToCartSnack(product.fields); }}>Add to Cart</button>
-              </div>
-            ))}
-          </div>
-          
-        </div>
-      </SnackbarProvider>
-    </>
+        ))}
+      </div>
+    </div>
   );
 }
+
+const Home = ({addToCart}) => {
+  return (
+    <SnackbarProvider maxSnack={3}>
+      <CaruselDisplay addToCart={addToCart} />
+    </SnackbarProvider>
+  );
+};
 
 export default Home;
