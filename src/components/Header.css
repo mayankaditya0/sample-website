@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #17152f;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 50px; /* Space between icons */
+}
+
+.nav-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+}
+
+.nav-icon span {
+    font-size: 12px; /* Smaller text for labels */
+}

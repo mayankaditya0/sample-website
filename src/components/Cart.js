@@ -23,19 +23,25 @@ axios.post('/api/notify-admin', { cartItems })
     return <h2>Order placed successfully!</h2>;
   }
 
-
+console.log('%%%%%%%%%%%%%%%%%', props.cart)
  
   return (
     <div style={{width:"100%", color:'white', height: "100vh"}}>
       <h1>Your Cart</h1>
-      <ul>
+      <div style={{display:'flex', width:'100%', justifyContent:'space-around'}}>
       {props?.cart?.map((product, index) => (
-          <li key={index}>
-            {product.productName} - ${product.productPrice}
-          </li>
+          <div style={{height:'180px', width:'150px', padding:'5px', border:'2px solid silver', display:'flex', flexDirection:'column', alignItems:'center'}} key={index}>
+          <img style={{height: "80px", width:'100px', objectFit:'contain'}}src={product?.productImage?.fields?.file?.url} alt={product?.productName} />
+          <div >
+            <p>{product.productName}</p>
+            <p>RS {product.productPrice}</p>
+          </div>
+        </div>
         ))}
-      </ul>
-      <button style={{backgroundColor:'#61dafb', color:'white', height:'30px', width:'100px', marginLeft:'8px', borderRadius:'8px'}}onClick={placeOrder}>Place Order</button>
+      </div>
+      <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop:'32px', width:'100%'}}>
+      <button style={{backgroundColor:'#61dafb', fontSize:'16px',color:'white', height:'60px', width:'200px', marginLeft:'8px', borderRadius:'8px'}}onClick={placeOrder}>Place Order</button>
+      </div>
     </div>
   );
 };
